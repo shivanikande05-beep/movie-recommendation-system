@@ -1,0 +1,26 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Movie Recommendation System</title>
+  <link rel="stylesheet" href="{{ url_for('static', filename='style.css') }}">
+</head>
+<body>
+  <div class="container">
+    <h1>🎬 Movie Recommendation System</h1>
+    <input type="text" id="movieInput" placeholder="Enter movie name">
+    <button onclick="getRecommendations()">Get Recommendations</button>
+    <div id="result"></div>
+  </div>
+  <script>
+    async function getRecommendations() {
+      const movie = document.getElementById("movieInput").value
+      const res = await fetch(`/recommend?movie=${movie}`)
+      const data = await res.json()
+      document.getElementById("result").innerHTML =
+        "<h3>Recommended Movies:</h3>" + data.join("<br>")
+    }
+  </script>
+</body>
+</html>
